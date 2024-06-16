@@ -1,0 +1,33 @@
+version: 2.1
+executors:
+  node-executor:
+    docker:
+      - image: circleci/node:14
+
+jobs:
+  build:
+    executor: node-executor
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+            - v1-dependencies-{{ checksum "package.json" }}
+      - run:
+          name: Install Dependencies
+          command: npm install
+      - save_cache:
+          paths:
+            - node_modules
+          key: v1-dependencies-{{ checksum "package.json" }}
+      - run:
+          name: Run Unit Tests
+          command: npm test
+      - run:
+          name: Run E2E Tests
+          command: npx cypress run
+
+workflows:
+  version: 2
+  test:
+    jobs:
+      - build
