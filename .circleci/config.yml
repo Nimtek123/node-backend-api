@@ -2,7 +2,7 @@ version: 2.1
 executors:
   node-executor:
     docker:
-      - image: circleci/node:14
+      - image: circleci/node:latest
 
 jobs:
   build:
@@ -13,18 +13,40 @@ jobs:
           keys:
             - v1-dependencies-{{ checksum "package.json" }}
       - run:
+          name: Install libnss3
+          command: |
+            sudo apt-get update
+            sudo apt-get install -y libnss3 libatk1.0-0 libatk-bridge2.0-0 libgtk-3-0 libgbm-dev libasound2
+      - run:
           name: Install Dependencies
           command: npm install
       - save_cache:
           paths:
             - node_modules
           key: v1-dependencies-{{ checksum "package.json" }}
+      
+      - run:
+            name: Run Build 
+            command: npm run build
+            
+      - run:
+            name: Start Server
+            command: npm run serve
+            background: true
+
+      - run:
+          name: Wait for Server to be Ready
+          command: |
+            # Wait until the server is available before running tests
+            echo "Waiting for server to start..."
+            npx wait-on http://localhost:8000
+
       - run:
           name: Run Unit Tests
           command: npm test
-      # - run:
-      #     name: Run E2E Tests
-      #     command: npx cypress run
+      - run:
+          name: Run E2E Tests
+          command: npx cypress run --e2e
 
 workflows:
   version: 2
