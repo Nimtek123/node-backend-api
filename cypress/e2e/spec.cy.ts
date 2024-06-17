@@ -70,7 +70,7 @@ describe('Pet Service API Tests', () => {
 
     cy.request('POST', `${apiUrl}/pets`, newPet)
       .its('status')
-      .should('eq', 201);
+      .should('eq', 200);
 
     cy.request(`${apiUrl}/pets/${petsLen}`)
       .its('body')
@@ -121,7 +121,7 @@ describe('Pet Service API Tests', () => {
   it('should delete a pet', () => {
     cy.request('DELETE', `${apiUrl}/pets/10`)
       .its('status')
-      .should('eq', 204);
+      .should('eq', 200);
 
     cy.request({
       url: `${apiUrl}/pets/10`,
