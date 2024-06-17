@@ -25,11 +25,22 @@ jobs:
             - node_modules
           key: v1-dependencies-{{ checksum "package.json" }}
       - run:
+            name: Start Server
+            command: npm run serve
+            background: true
+
+      - run:
+          name: Wait for Server to be Ready
+          command: |
+            # Wait until the server is available before running tests
+            echo "Waiting for server to start..."
+            npx wait-on http://localhost:8000
+      - run:
           name: Run Unit Tests
           command: npm test
       - run:
           name: Run E2E Tests
-          command: npx cypress run
+          command: npx cypress run --e2e
 
 workflows:
   version: 2
