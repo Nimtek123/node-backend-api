@@ -43,16 +43,24 @@ The Pets API is a TypeScript API. The api provides endpoints to manage Pets web 
 │   │   └── pet.ts
 │   ├── utils
 │   │   └── validation.ts
-│   └── index.ts
+│   │ 
 ├── data
-│   └── pets.json
+│   ├── pets.json
+│   └── test_pets.json
 ├── tests
-│   ├── unit
-│   └── e2e
-│       └── pets.spec.ts
+│   └── petService.test.ts
+│   │ 
+├── .circleci
+│   └── config.yml
+│   │ 
+├── index.ts
 ├── .env
+├── .gitignore
 ├── package.json
 ├── tsconfig.json
+├── jest.config.js
+├── CHANGELOG.md
+├── CONTRIBUTION.md
 └── README.md
 ```
 

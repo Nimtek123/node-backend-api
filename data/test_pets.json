@@ -1,14 +1,5 @@
 [
   {
-    "id": 1,
-    "name": "Daamins",
-    "species": "Cat",
-    "available": false,
-    "birthYear": 2012,
-    "dateAdded": "19-06-2021",
-    "photoUrl": "https://i.imgur.com/wpfirW7.jpg"
-  },
-  {
     "id": 2,
     "name": "Dann",
     "species": "Dog",
@@ -178,5 +169,14 @@
     "birthYear": 2010,
     "dateAdded": "19-01-2022",
     "photoUrl": "https://i.imgur.com/y5MOaAb.jpg"
+  },
+  {
+    "id": 22,
+    "name": "Test",
+    "species": "Lion",
+    "available": false,
+    "birthYear": 2024,
+    "dateAdded": "16-06-2024",
+    "photoUrl": "https://i.imgur.com/wpfirW7.jpg"
   }
 ]

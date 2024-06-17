@@ -2,13 +2,13 @@
 import express, { Express, Request, Response } from 'express';
 import dotenv from 'dotenv';
 import bodyParser from 'body-parser';
-import petRoutes from './src/routes/petRoutes';
+import petRoutes from './routes/petRoutes';
 import fs from 'fs';
 
 dotenv.config();
 
 const app: Express = express();
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 3000; //if is not set port will default to 3000
 
 app.use(bodyParser.json());
 
