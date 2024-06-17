@@ -26,7 +26,6 @@ export const createPet = (req: Request, res: Response) => {
 export const updatePet = (req: Request, res: Response) => {
     const updatedPet = petService.updatePet(Number(req.params.id), req.body);
     if (updatedPet) {
-        console.log(updatedPet)
         res.json({message: 'Pet update successfully', ...updatedPet});
     } else {
         res.status(404).send('Pet not found');

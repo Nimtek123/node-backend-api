@@ -4,7 +4,6 @@ import { Pet } from '../models/pet';
 
 const filePath = './data/pets.json';
 const testJsonPath = './data/test_pets.json';
-const isTesting = process.env.NODE_ENV === 'testing';
 
 export class PetService {
     private pets: Pet[];
@@ -13,7 +12,7 @@ export class PetService {
         this.pets = JSON.parse(fs.readFileSync(filePath, 'utf8'));
 
         //lets use test file for testing
-        if(isTesting){
+        if(process.env.NODE_ENV === 'testing'){
             this.pets = JSON.parse(fs.readFileSync(testJsonPath, 'utf8'));
         }
     }
@@ -42,6 +41,10 @@ export class PetService {
     }
 
     deletePet(id: number): boolean {
+        this.pets = JSON.parse(fs.readFileSync(filePath, 'utf8'));
+
+        console.log(this.pets)
+
         const index = this.pets.findIndex(pet => pet.id === id);
         if (index !== -1) {
             this.pets.splice(index, 1);
@@ -52,7 +55,6 @@ export class PetService {
     }
 
     private saveToFile() {
-        console.log(process.env.NODE_ENV) 
         if(process.env.NODE_ENV === 'testing'){
             fs.writeFileSync(testJsonPath, JSON.stringify(this.pets, null, 2));
         }else{

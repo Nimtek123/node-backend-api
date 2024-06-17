@@ -17,7 +17,6 @@ const createPetSchema = Joi.object({
 
 // Schema for updating an existing pet
 const updatePetSchema = Joi.object({
-  id: Joi.number().integer().optional(),
   name: Joi.string().required(),
   species: Joi.string().required(),
   available: Joi.boolean().required(),

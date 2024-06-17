@@ -5,14 +5,17 @@ import fs from 'fs';
 
 const filePath = './data/pets.json';
 const testJsonPath = './data/test_pets.json';
+const originalJsonPath = './data/original_pets.json';
 
 describe('PetService', () => {
     let petService: PetService;
-    let pets = JSON.parse(fs.readFileSync(filePath, 'utf8'));
-    fs.writeFileSync(testJsonPath, JSON.stringify(pets), { encoding: 'utf8', flag: 'w' });
-
+    
     beforeEach(() => {
         petService = new PetService();
+        let pets = JSON.parse(fs.readFileSync(originalJsonPath, 'utf8'));
+        fs.writeFileSync(testJsonPath, JSON.stringify(pets), { encoding: 'utf8', flag: 'w' });
+        fs.writeFileSync(filePath, JSON.stringify(pets), { encoding: 'utf8', flag: 'w' });
+
     });
 
     test('should get all pets', () => {
@@ -29,9 +32,9 @@ describe('PetService', () => {
 
     test('should create a new pet', () => {
         const newPet: Pet = {
-            "id": 22,
+            "id": 21,
             "name": "Test",
-            "species": "Lion",
+            "species": "Lion test",
             "available": false,
             "birthYear": 2024,
             "dateAdded": "16-06-2024",
@@ -42,9 +45,9 @@ describe('PetService', () => {
     });
 
     test('should update an existing pet', () => {
-        const updatedPet = petService.updatePet(1, { name: 'Buddy' });
+        const updatedPet = petService.updatePet(3, { name: 'Test' });
         expect(updatedPet).toBeDefined();
-        expect(updatedPet?.name).toBe('Buddy');
+        expect(updatedPet?.name).toBe('Test');
     });
 
     test('should delete a pet', () => {

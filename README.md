@@ -8,7 +8,7 @@
 
 ## Design Approach
 * Separating the project into distinct layers (models, services, controllers, routes, utils), I ensured that each part of the application has a single responsibility. This makes the codebase more maintainable and scalable
-* Each module was designed to be reusable and easily testable. This modularity allows for easier enhancements and better code organization
+* Each module is designed to be reusable and easily testable. This modularity allows for easier enhancements and better code organization
 * Created a service layer to handle data operations separately. This makes it easier to switch to a different data store, such as a database, in the future without major code changes
 * Added a middleware for validation of post data. This ensures that the API can handle and validate incoming data correctly, reducing the risk of processing invalid data.
 * Added unit and End-to-End testing to help catch errors early in the development process, ensuring that new changes do not break existing functionality
